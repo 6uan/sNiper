@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.border {
+  border: solid black 2px;
+}
+
+label {
+  text-align: left;
+}
