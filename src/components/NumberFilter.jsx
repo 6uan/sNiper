@@ -3,6 +3,7 @@ import TextField from "./TextField";
 import "./NumberFilter.css";
 
 import { findPerfectSquares, isFib } from "./MathUtils.js";
+import FilterBox from "./FilterBox.jsx";
 
 const NumberFilter = () => {
   const [input, setInput] = useState("");
@@ -23,7 +24,7 @@ const NumberFilter = () => {
 
   const handleFilterChange = (e) => {
     const userLength = parseInt(e.target.getAttribute("length"), 10); // Retrieve and parse the data-length attribute
-    const filterType = e.target.getAttribute("filter-type");
+    const filterType = e.target.getAttribute("filterType");
 
     setCurrentFilterType(filterType);
 
@@ -47,82 +48,58 @@ const NumberFilter = () => {
   };
 
   return (
-    <div>
+    <>
       <TextField value={input} onChange={handleInputChange} />
-      <br />
-      <br />
-      <div className="grid">
-        <label>
-          <input
-            type="checkbox"
-            name="fourDigitPerfectSquare"
-            filter-type="perfectSquare"
-            checked={filters.fourDigitPerfectSquare}
-            onChange={handleFilterChange}
-            length={4}
-          />
-          4D Perfect Square
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            name="fiveDigitPerfectSquare"
-            filter-type="perfectSquare"
-            checked={filters.fiveDigitPerfectSquare}
-            onChange={handleFilterChange}
-            length={5}
-          />
-          5D Perfect Square
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            name="sixDigitPerfectSquare"
-            filter-type="perfectSquare"
-            checked={filters.sixDigitPerfectSquare}
-            onChange={handleFilterChange}
-            length={6}
-          />
-          6D Perfect Square
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            name="threeDigitFibonacci"
-            filter-type="fibonacciNumber"
-            checked={filters.threeDigitFibonacci}
-            onChange={handleFilterChange}
-            length={3}
-          />
-          3D Fibonacci
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            name="fourDigitFibonacci"
-            filter-type="fibonacciNumber"
-            checked={filters.fourDigitFibonacci}
-            onChange={handleFilterChange}
-            length={4}
-          />
-          4D Fibonacci
-        </label>
-
-        <label>
-          <input
-            type="checkbox"
-            name="fiveDigitFibonacci"
-            filter-type="fibonacciNumber"
-            checked={filters.fiveDigitFibonacci}
-            onChange={handleFilterChange}
-            length={5}
-          />
-          5D Fibonacci
-        </label>
+      
+      <div className="grid-container">
+        <FilterBox
+          name="fourDigitPerfectSquare"
+          filterType="perfectSquare"
+          checked={filters.fourDigitPerfectSquare}
+          onChange={handleFilterChange}
+          length={4}
+          label="4D Perfect Square"
+        />
+        <FilterBox
+          name="fiveDigitPerfectSquare"
+          filterType="perfectSquare"
+          checked={filters.fiveDigitPerfectSquare}
+          onChange={handleFilterChange}
+          length={5}
+          label="5D Perfect Square"
+        />
+        <FilterBox
+          name="sixDigitPerfectSquare"
+          filterType="perfectSquare"
+          checked={filters.sixDigitPerfectSquare}
+          onChange={handleFilterChange}
+          length={6}
+          label="6D Perfect Square"
+        />
+        <FilterBox
+          name="threeDigitFibonacci"
+          filterType="fibonacciNumber"
+          checked={filters.threeDigitFibonacci}
+          onChange={handleFilterChange}
+          length={3}
+          label="3D Fibonacci"
+        />
+        <FilterBox
+          name="fourDigitFibonacci"
+          filterType="fibonacciNumber"
+          checked={filters.fourDigitFibonacci}
+          onChange={handleFilterChange}
+          length={4}
+          label="4D Fibonacci"
+        />
+        <FilterBox
+          name="fiveDigitFibonacci"
+          filterType="fibonacciNumber"
+          checked={filters.fiveDigitFibonacci}
+          onChange={handleFilterChange}
+          length={5}
+          label="5D Fibonacci"
+        />
       </div>
 
       {results.length > 0 && (
@@ -147,7 +124,7 @@ const NumberFilter = () => {
           })}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
