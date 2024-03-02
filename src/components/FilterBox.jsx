@@ -7,10 +7,10 @@ const FilterBox = (props) => {
       <input
         type="checkbox"
         name={props.name}
-        filterType={props.filterType}
         checked={props.checked}
         onChange={props.onChange}
-        length={props.length}
+        data-filter-type={props.filterType}
+        data-length={props.length}
       />
       {props.label}
     </label>

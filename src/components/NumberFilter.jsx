@@ -4,9 +4,11 @@ import "./NumberFilter.css";
 
 import { findPerfectSquares, isFib } from "./MathUtils.js";
 import FilterBox from "./FilterBox.jsx";
+import Result from "./Result.jsx";
 
 const NumberFilter = () => {
   const [input, setInput] = useState("");
+  const [currentFilterType, setCurrentFilterType] = useState("");
   const [filters, setFilters] = useState({
     fourDigitPerfectSquare: false,
     fiveDigitPerfectSquare: false,
@@ -15,7 +17,6 @@ const NumberFilter = () => {
     fourDigitFibonacci: false,
     fiveDigitFibonacci: false,
   });
-  const [currentFilterType, setCurrentFilterType] = useState("");
   const [results, setResults] = useState([]);
 
   const handleInputChange = (e) => {
@@ -23,20 +24,19 @@ const NumberFilter = () => {
   };
 
   const handleFilterChange = (e) => {
-    const userLength = parseInt(e.target.getAttribute("length"), 10); // Retrieve and parse the data-length attribute
-    const filterType = e.target.getAttribute("filterType");
-
+    const userLength = parseInt(e.target.dataset.length, 10);
+    const filterType = e.target.dataset.filterType;
     setCurrentFilterType(filterType);
-
     setFilters({
       ...filters,
       [e.target.name]: e.target.checked,
     });
 
-    // Check if the checkbox is checked and input is not empty
+    // checkbox is checked and input is not empty
     if (e.target.checked && input) {
+      console.log("worked");
       if (filterType === "perfectSquare") {
-        const foundSquares = findPerfectSquares(input, userLength); // Use squareLength as parameter
+        const foundSquares = findPerfectSquares(input, userLength);
         setResults(foundSquares);
       } else if (filterType === "fibonacciNumber") {
         const foundFib = isFib(input, userLength);
@@ -50,7 +50,6 @@ const NumberFilter = () => {
   return (
     <>
       <TextField value={input} onChange={handleInputChange} />
-      
       <div className="grid-container">
         <FilterBox
           name="fourDigitPerfectSquare"
@@ -103,26 +102,7 @@ const NumberFilter = () => {
       </div>
 
       {results.length > 0 && (
-        <div>
-          <p>Results:</p>
-          {results.map((result, index) => {
-            if (currentFilterType === "perfectSquare") {
-              return (
-                <p key={index}>
-                  Block: {result.block}, Perfect Square: {result.perfectSquare},
-                  Square Root: {result.squareRoot}
-                </p>
-              );
-            } else if (currentFilterType === "fibonacciNumber") {
-              return (
-                <p key={index}>
-                  Block: {result.block}, Fibonacci Substring:{" "}
-                  {result.fibSubString}
-                </p>
-              );
-            }
-          })}
-        </div>
+        <Result results={results} currentFilterType={currentFilterType} />
       )}
     </>
   );
