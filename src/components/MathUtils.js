@@ -41,18 +41,23 @@ export const isFib = (value, targetLength = 3) => {
   let results = [];
   let numbers = value.split(",");
 
-  numbers.forEach((number) => {
-    for (let i = 0; i <= number.length - targetLength; i++) {
-      const substring = number.substring(i, i + targetLength);
+  numbers.forEach((rawNumber) => {
+    const number = rawNumber.trim();
 
-      if (substring.startsWith("0") && substring !== "0") {
-        continue;
-      }
+    for (let i = 0; i <= number.length - targetLength; i++) {
+      const substring = number
+        .substring(i, i + targetLength)
+        .replace(/^0+/, "");
+
+      if (substring.length < targetLength || substring === "") continue;
 
       const num = parseInt(substring, 10);
 
       if (fibonacciNumbers.includes(num)) {
-        results.push({ block: number, fibSubString: substring });
+        results.push({
+          block: number,
+          fibSubString: substring,
+        });
       }
     }
   });
