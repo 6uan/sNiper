@@ -2,19 +2,28 @@ export const findPerfectSquares = (value, targetLength = 4) => {
   let results = [];
   let numbers = value.split(",");
 
-  numbers.forEach((number) => {
-    for (let i = 0; i <= number.length - targetLength; i++) {
-      const substring = number.substring(i, i + targetLength);
+  numbers.forEach((rawNumber) => {
+    const number = rawNumber.trim();
 
-      const num = parseInt(substring, 10);
+    for (let i = 0; i <= number.length - targetLength; i++) {
+      let substring = number.substring(i, i + targetLength);
+
+      if (substring.replace(/^0+/, "") === "" && substring !== "0") continue;
+
+      let num = parseInt(substring, 10);
+
+      if (substring.replace(/^0+/, "").length < targetLength) continue;
+
       if (isPerfectSquare(num)) {
-        const sqrt = Math.sqrt(num);
-        results.push({
-          block: number,
-          perfectSquare: substring,
-          squareRoot: sqrt,
-        });
-        break;
+        let sqrt = Math.sqrt(num);
+        if (Number.isInteger(sqrt)) {
+          results.push({
+            block: number,
+            perfectSquare: substring,
+            squareRoot: sqrt,
+          });
+          break;
+        }
       }
     }
   });
@@ -28,7 +37,7 @@ export const isPerfectSquare = (num) => {
   return sqrt * sqrt === num;
 };
 
-export const isFib = (value, targetLength = 2) => {
+export const isFib = (value, targetLength = 3) => {
   let results = [];
   let numbers = value.split(",");
 
@@ -69,7 +78,7 @@ export const isMultiple = (value, targetMultiple = 12) => {
       results.push({
         block: number,
         multiple: targetMultiple,
-        multipleResult: num / targetMultiple, // This will give you the number that when multiplied by targetMultiple gives the original number
+        multipleResult: num / targetMultiple,
       });
     }
   });
