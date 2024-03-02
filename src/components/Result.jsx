@@ -19,6 +19,13 @@ const Result = ({ results, currentFilterType }) => {
               Block: {result.block}, Fibonacci Substring: {result.fibSubString}
             </p>
           );
+        } else if (currentFilterType === "multipleOf") {
+          return (
+            <p key={index}>
+              Block: {result.block}, Multiple: {result.multiple}, Multiple
+              Result: {result.multipleResult}
+            </p>
+          );
         }
       })}
     </div>

@@ -14,7 +14,7 @@ export const findPerfectSquares = (value, targetLength = 4) => {
           perfectSquare: substring,
           squareRoot: sqrt,
         });
-        break; // Stop after finding the first perfect square in this number ?
+        break;
       }
     }
   });
@@ -58,3 +58,20 @@ const fibonacciNumbers = [
   39088169, 63245986, 102334155, 165580141, 267914296, 433494437, 701408733,
   1134903170, 1836311903, 2971215073, 4807526976, 7778742049,
 ];
+
+export const isMultiple = (value, targetMultiple = 12) => {
+  let results = [];
+  let numbers = value.split(",");
+
+  numbers.forEach((number) => {
+    const num = parseInt(number.trim(), 10);
+    if (num % targetMultiple === 0) {
+      results.push({
+        block: number,
+        multiple: targetMultiple,
+        multipleResult: num / targetMultiple, // This will give you the number that when multiplied by targetMultiple gives the original number
+      });
+    }
+  });
+  return results;
+};
