@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import TextField from "./TextField";
+import FilterBox from "./FilterBox.jsx";
+import Result from "./Result.jsx";
 import "./NumberFilter.css";
 
 import { findPerfectSquares, isFib, isMultiple } from "./MathUtils.js";
-import FilterBox from "./FilterBox.jsx";
-import Result from "./Result.jsx";
 
 const NumberFilter = () => {
   const [input, setInput] = useState("");
@@ -40,16 +40,12 @@ const NumberFilter = () => {
 
     // checkbox is checked and input is not empty
     if (e.target.checked && input) {
-      console.log("worked");
       if (filterType === "perfectSquare") {
-        const foundSquares = findPerfectSquares(input, userLength);
-        setResults(foundSquares);
+        setResults(findPerfectSquares(input, userLength));
       } else if (filterType === "fibonacciNumber") {
-        const foundFib = isFib(input, userLength);
-        setResults(foundFib);
+        setResults(isFib(input, userLength));
       } else if (filterType == "multipleOf") {
-        const foundMultiple = isMultiple(input, userMultiple);
-        setResults(foundMultiple);
+        setResults(isMultiple(input, userMultiple));
       }
     } else {
       setResults([]);
@@ -163,10 +159,7 @@ const NumberFilter = () => {
           label="Mutiple of 69"
         />
       </div>
-      {console.log(results.length)}
-      {results.length > 0 && (
-        <Result results={results} currentFilterType={currentFilterType} />
-      )}
+      <Result results={results} currentFilterType={currentFilterType} />
     </>
   );
 };

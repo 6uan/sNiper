@@ -7,7 +7,7 @@ const TextField = ({ value, onChange }) => {
       <input
         className="width"
         type="text"
-        placeholder="Enter numbers separated by commas"
+        placeholder="Enter block numbers separated by commas"
         value={value}
         onChange={onChange}
       />
