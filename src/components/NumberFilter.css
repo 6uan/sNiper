@@ -1,6 +1,7 @@
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  
 }
 
 .border {
@@ -14,4 +15,13 @@ label {
 .flex {
   display: flex;
   flex-direction: row;
+}
+
+
+@media (max-width: 1000px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding-left: 25%
+  }
 }

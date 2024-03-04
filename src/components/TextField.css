@@ -2,3 +2,10 @@
   min-width: 450px;
   max-width: 550px;
 }
+
+@media (max-width: 1000px) {
+  .width {
+    min-width: 250px;
+    max-width: 350px;
+  }
+}

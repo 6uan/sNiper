@@ -1,6 +1,5 @@
 import "./App.css";
 import NumberFilter from "./components/NumberFilter";
-import TextField from "./components/TextField";
 
 function App() {
   return (
